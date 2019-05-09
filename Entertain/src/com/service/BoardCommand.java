@@ -2,6 +2,7 @@ package com.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.dao.BoardDAO;
 public interface BoardCommand {
 
 	public void execute(HttpServletRequest request,HttpServletResponse reponse);

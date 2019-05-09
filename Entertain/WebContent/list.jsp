@@ -1,7 +1,41 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" import="java.sql.*"
     pageEncoding="UTF-8"%>
+    
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<% request.setCharacterEncoding("UTF-8"); %>
+
+<%
+
+	Connection conn=null;
+	PreparedStatement pstmt=null;
+
+	String jdbc_driver="com.mysql.jdbc.Driver";
+	String jdbc_url="jdbc:mysql://localhost/jspdb?serverTimezone=UTC";
+
+	try{
+   		Class.forName(jdbc_driver);
+   		conn=DriverManager.getConnection(jdbc_url,"root","038062");
+   		String sql="insert into member values(?,?,?,?,?,?,?,?,?)";
+   		pstmt=conn.prepareStatement(sql);
+   		pstmt.setString(1,request.getParameter("num"));
+   		pstmt.setString(2,request.getParameter("author"));
+   		pstmt.setString(3,request.getParameter("title"));
+   		pstmt.setString(4,request.getParameter("content"));
+   		pstmt.setString(4,request.getParameter("writeday"));
+   		pstmt.setString(4,request.getParameter("readcnt"));
+   		pstmt.setString(4,request.getParameter("repRoot"));
+   		pstmt.setString(4,request.getParameter("repStep"));
+   		pstmt.setString(4,request.getParameter("repIndent"));
+   
+   		if(request.getParameter("num")!=null){
+   			pstmt.executeUpdate();
+   		}	
+		}
+	catch(Exception e){
+   		System.out.println(e);
+		}
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,12 +67,6 @@
 		<c:forEach items="${list}" var="dto">
 			<tr>
 				<td>${dto.num}</td>
-				<td>
-				<c:forEach begin="1" end="${dto.repIndent }">
-		    	<%= "&nbsp;&nbsp;" %>
-		   		</c:forEach>   
-			   	<a href="retrieve.do?num=${dto.num}">${dto.title}</a>
-			   	</td>
 				<td>${dto.title}</td>
 				<td>${dto.author}</td>
 				<td>${dto.writeday}</td>

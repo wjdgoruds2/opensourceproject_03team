@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.RequestDispatcher;
 import com.service.BoardCommand;
 import com.service.BoardListCommand;
+import com.service.BoardWriteCommand;
 
 @WebServlet("*.do")
 public class BoardFrontController extends HttpServlet {
@@ -20,77 +21,27 @@ public class BoardFrontController extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException
 	{
+		request.setCharacterEncoding("EUC-KR");
 		String requestURI=request.getRequestURI();
 		String contextPath=request.getContextPath();
 		String com=requestURI.substring(contextPath.length());
 		
 		BoardCommand command=null;
 		String nextPage=null;
-		/*if(com.equals("/list.do")) {
+		if(com.equals("/list.do")) {
 			command=new BoardListCommand();
 			command.execute(request, response);
 			nextPage="list.jsp";
-		}*/
-		// 글쓰기 폼
-		if(com.equals("/writeui.do")){
-			nextPage = "write.jsp";
 		}
-		// 글쓰기
-		if(com.equals("/write.do")){
+		if(com.equals("/writeui.do")) {
+			nextPage="write.jsp";
+		}
+		if(com.equals("/write.do")) {
 			command = new BoardWriteCommand();
-			command.execute(request, response);
-			nextPage = "list.do";
+			command.execute(request,response);
+			nextPage="list.do";
 		}
-		// 글 자세히 보기
-		if(com.equals("/retrieve.do")){
-			command = new BoardRetrieveCommand();
-			command.execute(request, response);
-			nextPage = "retrieve.jsp";
-		}	
-		
-		// 글 수정하기
-		if(com.equals("/update.do")){
-			command = new BoardUpdateCommand();
-			command.execute(request, response);
-			nextPage = "list.do";
-		}	
-		
-		// 글 삭제하기
-		if(com.equals("/delete.do")){
-			command = new BoardDeleteCommand();
-			command.execute(request, response);
-			nextPage = "list.do";
-		}	
-		
-		// 글 검색하기
-		if(com.equals("/search.do")){
-			command = new BoardSearchCommand();
-			command.execute(request, response);
-			nextPage = "list.jsp";
-		}	
-		
-		// 답변글 입력 폼 보기
-		if(com.equals("/replyui.do")){
-			command = new BoardReplyUICommand();
-			command.execute(request, response);
-			nextPage = "reply.jsp";
-		}	
-		
-		// 답변 글쓰기
-		if(com.equals("/reply.do")){
-			command = new BoardReplyCommand();
-			command.execute(request, response);
-			nextPage = "list.do";
-		}	
-		
-		// 페이징처리
-		if(com.equals("/list.do")){
-			command = new BoardPageCommand();
-			command.execute(request, response);
-			nextPage = "listPage.jsp";
-		}	
-		
-		RequestDispatcher dis=request.getRequestDispatcher(nextPage);
-		dis.forward(request,response);
+	RequestDispatcher dis=request.getRequestDispatcher(nextPage);
+	dis.forward(request,response);
 	}
 }
