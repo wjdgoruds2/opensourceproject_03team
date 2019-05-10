@@ -40,62 +40,62 @@ public class BoardFrontController extends HttpServlet {
 		BoardCommand command  = null;
 		String nextPage = null;
 		
-		// ¸ñ·Ïº¸±â
+		// ëª©ë¡ë³´ê¸°
 		/*if(com.equals("/list.do")){
 			command = new BoardListCommand();
 			command.execute(request, response);
 			nextPage = "list.jsp";
 		}*/
-		// ±Û¾²±â Æû
+		// ê¸€ì“°ê¸° í¼
 		if(com.equals("/writeui.do")){
 			nextPage = "write.jsp";
 		}
-		// ±Û¾²±â
+		// ê¸€ì“°ê¸°
 		if(com.equals("/write.do")){
 			command = new BoardWriteCommand();
 			command.execute(request, response);
 			nextPage = "list.do";
 		}
-		// ±Û ÀÚ¼¼È÷ º¸±â
+		// ê¸€ ìì„¸íˆ ë³´ê¸°
 		if(com.equals("/retrieve.do")){
 			command = new BoardRetrieveCommand();
 			command.execute(request, response);
 			nextPage = "retrieve.jsp";
 		}	
 		
-		//±Û ¼öÁ¤ ÇÏ±â
+		//ê¸€ ìˆ˜ì • í•˜ê¸°
 		if(com.equals("/update.do")){
 			command = new BoardUpdateCommand();
 			command.execute(request, response);
 			nextPage = "list.do";
 		}	
 		
-		//±Û »èÁ¦ ÇÏ±â
+		//ê¸€ ì‚­ì œ í•˜ê¸°
 		if(com.equals("/delete.do")){
 			command = new BoardDeleteCommand();
 			command.execute(request, response);
 			nextPage = "list.do";
 		}	
 		
-		//±Û °Ë»ö ÇÏ±â
+		//ê¸€ ê²€ìƒ‰ í•˜ê¸°
 		if(com.equals("/search.do")){
 			command = new BoardSearchCommand();
 			command.execute(request, response);
 			nextPage = "list.jsp";
 		}	
-		//´äº¯±Û ÀÔ·Â Æû º¸±â
+		//ë‹µë³€ê¸€ ì…ë ¥ í¼ ë³´ê¸°
 		if(com.equals("/replyui.do")){
 			command = new BoardReplyUICommand();
 			command.execute(request, response);
 			nextPage = "reply.jsp";
 		}	
-		//´äº¯±Û ¾²±â
+		//ë‹µë³€ê¸€ ì“°ê¸°
 		if(com.equals("/reply.do")){
 			command = new BoardReplyCommand();
 			command.execute(request, response);
 			nextPage = "list.do";
 		}	
-		// ÆäÀÌÂ¡ Ã³¸®
+		// í˜ì´ì§• ì²˜ë¦¬
 		if(com.equals("/list.do")){
 			command = new BoardPageCommand();
 			command.execute(request, response);

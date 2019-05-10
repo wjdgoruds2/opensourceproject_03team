@@ -18,9 +18,9 @@ public class BoardDAO {
 
 	DataSource dataFactory;
 	private final String diverClassName = "com.mysql.jdbc.Driver";
-	private final String url = "jdbc:mysql://localhost:3306/sys?autoReconnect=true&useSSL=false";
+	private final String url = "jdbc:mysql://localhost/jspdb";
 	private final String username = "root";
-	private final String pass = "rkrirjru1010!";
+	private final String pass = "038062";
 
 	public BoardDAO() {
 		try {
@@ -129,7 +129,6 @@ public class BoardDAO {
 		} // end finally
 	}// end insert
 
-	// 占쏙옙회占쏙옙 1 占쏙옙占쏙옙
 	public void readCount(String _num) {
 
 		Connection connection = null;
@@ -155,10 +154,10 @@ public class BoardDAO {
 		} // end finally
 	}// end readCount
 
-	// 占쏙옙 占쌘쇽옙占쏙옙 占쏙옙占쏙옙
+
 	public BoardDTO retrieve(String _num) {
 
-		// 占쏙옙회占쏙옙 占쏙옙占쏙옙
+
 		readCount(_num);
 		Connection con = null;
 		PreparedStatement pstmt = null;

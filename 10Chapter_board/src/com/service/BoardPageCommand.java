@@ -12,7 +12,7 @@ public class BoardPageCommand implements BoardCommand {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		int curPage = 1;  //ÇöÀç ÆäÀÌÁö
+		int curPage = 1;  //ê¸°ë³¸í˜ì´ì§€
 
 		if( request.getParameter( "curPage") != null ) {
 				curPage = Integer.parseInt( request.getParameter( "curPage" ));
