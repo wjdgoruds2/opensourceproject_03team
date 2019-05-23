@@ -30,20 +30,19 @@ public class ControllerAction extends HttpServlet {
         {
  
             String command = actionEnumHome.nextElement();
-            ;
  
             String className = rbHome.getString(command);
  
             try {
+            	
  
                 Class<?> commandClass = Class.forName(className);
  
                 Object commandInstance = commandClass.newInstance(); 
-                
                 commandMap.put(command, commandInstance); 
  
             } catch (ClassNotFoundException e) {
- 
+            	System.out.print(e);
                 continue; // error
  
                 // throw new ServletException(e);
@@ -51,10 +50,11 @@ public class ControllerAction extends HttpServlet {
             } catch (InstantiationException e) {
  
                 e.printStackTrace();
+            
  
             } catch (IllegalAccessException e) {
- 
-                e.printStackTrace();
+            	System.out.print(e);
+               
  
             }
  
@@ -88,11 +88,10 @@ public class ControllerAction extends HttpServlet {
         try {
  
             String command = request.getRequestURI();
- 
+            
             if (command.indexOf(request.getContextPath()) == 0) {
  
                 command = command.substring(request.getContextPath().length());
- 
             }
  
             com = (CommandAction) commandMap.get(command);

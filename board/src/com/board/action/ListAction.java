@@ -48,7 +48,7 @@ public class ListAction implements CommandAction {
     		String query = null; 
     		
     		if(opt == null){    			
-    			query = "select * from board order by num";
+    			query = "select * from board order by boarddate desc";
     		}else if(opt.equals("0")){    			
     			query = "select * from board where subject like '%"+condition+"%' order by num";        		
     		}else if(opt.equals("1")){    			

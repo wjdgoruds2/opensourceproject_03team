@@ -10,14 +10,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.board.beans.board;
+import com.board.beans.reply;
 import com.board.controller.CommandAction;
  
-public class ModifyformAction implements CommandAction {
+public class ReplyformAction implements CommandAction {
  
     public String requestPro(HttpServletRequest request,
  
@@ -39,35 +40,50 @@ public class ModifyformAction implements CommandAction {
         		}
     			
     			request.setCharacterEncoding("euc-kr");
-    			String num = request.getParameter("num");
+    			String subject = request.getParameter("subject");
     			
-    			conn = DriverManager.getConnection(url,dbUser,dbPass);    			    			
-    			String query = "select * from board where num = " + num;
-    					
-    			stmt = conn.createStatement();
+    			conn = DriverManager.getConnection(url,dbUser,dbPass);    		
+    			
+    			String query = "select * from reply where subject = '"+subject+"' order by boarddate desc";
+				stmt = conn.createStatement();
     			
     			rs = stmt.executeQuery(query);
-    			    			    	
-    			ArrayList<board> articleList = new ArrayList<board>();
+				ArrayList<reply> Replylist = new ArrayList<reply>();    		
+	    		
+	    		while(rs.next()){
+	    			reply article = new reply();
+	    			article.setcount(rs.getInt("count"));
+	    			article.setSubject(rs.getString("subject"));
+	    			article.setTitle(rs.getString("title"));
+	    			article.setContent(rs.getString("content"));
+	    			article.setId(rs.getString("id"));
+	    			article.setEmail(rs.getString("email"));
+	    			article.setBoarddate(rs.getString("boarddate"));
+	    			
+	    			Replylist.add(article);
+	    		 
+	    		}
     			
-        		while(rs.next()){        			
-        			board article = new board();
-        			article.setNum(rs.getInt("num"));    			
-        			article.setSubject(rs.getString("subject"));
-        			article.setContent(rs.getString("content"));
-        			article.setId(rs.getString("id"));
-        			article.setBoarddate(rs.getString("boarddate"));
-        			article.setEmail(rs.getString("email"));
-        			articleList.add(article);
-        		}
-        		request.setAttribute("articleList",articleList);
-        		
-    			stmt.close();
+    			if(Replylist.size()>0) {
+	    		request.setAttribute("Replylist",Replylist);
+	    		}
+	    		/*
+	    		for(int i = 0 ; i <Replylist.size() ; i++){
+
+	    			reply tmp = Replylist.get(i);
+
+                    	System.out.println(tmp.getEmail() + "\t" + tmp.getTitle() + "\t" + tmp.getId() + "\t");
+
+	    		}
+	    		*/
+	    		
+	    			stmt.close();
     			conn.close();
     			rs.close();
     		 
      } catch(SQLException e) {
     	System.out.println( e.toString() );
+    	
     } finally{
     	if(rs != null) try{rs.close();} catch(SQLException ex){}
     	if(stmt != null) try{stmt.close();} catch(SQLException ex){}			
@@ -75,7 +91,7 @@ public class ModifyformAction implements CommandAction {
 		}
     	
  
-        return "modifyform.jsp";
+        return "replylist.jsp";
  
     }
  

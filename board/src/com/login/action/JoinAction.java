@@ -62,6 +62,7 @@ public class JoinAction implements CommandAction {
     		HttpSession session = request.getSession();
     		
     		session.setAttribute("id", id);	
+    		session.setAttribute("email", email);	
     				
     	} catch(SQLException ex){
 			

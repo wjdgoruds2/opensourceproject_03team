@@ -1,28 +1,33 @@
 /**
- * ê¸€ì„ ì‘ì„± í•˜ê³  ë°ì´í„°ë² ì´ìŠ¤ì— ë„£ëŠ” Action
+ * ±ÛÀ» ÀÛ¼º ÇÏ°í µ¥ÀÌÅÍº£ÀÌ½º¿¡ ³Ö´Â Action
  */
 package com.board.action;
  
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.board.beans.reply;
 import com.board.controller.CommandAction;
  
-public class WriteAction implements CommandAction {
+public class ReplyAction implements CommandAction {
  
     public String requestPro(HttpServletRequest request,
  
     HttpServletResponse response) throws Throwable {
     	
     	request.setCharacterEncoding("euc-kr");
-    	//ì œëª©ê³¼ ë‚´ìš©ì„ ì…ë ¥ ë°›ì•„ ë³€ìˆ˜ì— ì €ì¥
+    	//Á¦¸ñ°ú ³»¿ëÀ» ÀÔ·Â ¹Ş¾Æ º¯¼ö¿¡ ÀúÀå
     	String subject = request.getParameter("subject");
+    	String title = request.getParameter("title");
     	String content = request.getParameter("content");
     	
     	
@@ -34,10 +39,10 @@ public class WriteAction implements CommandAction {
     	
     	Connection conn = null;
     	PreparedStatement pstmt = null;
-    	
+    
     	try{
     		HttpSession session = request.getSession();
-    		//ì„¸ì…˜ì„ ì½ì–´ ë¡œê·¸ì¸ ìƒíƒœê°€ ì•„ë‹ˆë©´ ë¡œê·¸ì¸ ì°½ìœ¼ë¡œ ì´ë™
+    		//¼¼¼ÇÀ» ÀĞ¾î ·Î±×ÀÎ »óÅÂ°¡ ¾Æ´Ï¸é ·Î±×ÀÎ Ã¢À¸·Î ÀÌµ¿
         	id = (String) session.getAttribute("id");
         	email = (String) session.getAttribute("email");
     		if( id == null){
@@ -53,14 +58,17 @@ public class WriteAction implements CommandAction {
 			conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 			
       		pstmt = conn.prepareStatement(      				
-    				"insert into board values(NULL,?,?,?,?,now(),0)");
+    				"insert into reply values(NULL,?,?,?,?,?,now())");
     				pstmt.setString(1, id);
     				pstmt.setString(2, subject);
-    				pstmt.setString(3, content);
-    				pstmt.setString(4, email);
-    				//ì¿¼ë¦¬ ì‹¤í–‰
+    				pstmt.setString(3, title);
+    				pstmt.setString(4, content);
+    				pstmt.setString(5, email);
+    				//Äõ¸® ½ÇÇà
     				pstmt.executeUpdate();
-    				
+    		
+        			conn.close();
+        			
     	} catch(SQLException ex){
 			
 		}finally{
@@ -69,7 +77,7 @@ public class WriteAction implements CommandAction {
     		}
     	
  
-        return "write.jsp";
+        return "reply.jsp";
  
     }
  

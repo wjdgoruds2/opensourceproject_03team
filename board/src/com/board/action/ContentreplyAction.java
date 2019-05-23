@@ -11,25 +11,22 @@ import javax.servlet.http.HttpServletResponse;
  
 import javax.servlet.http.HttpSession;
 
-import com.board.beans.board;
+import com.board.beans.reply;
  
 import com.board.controller.CommandAction;
  
-public class ContentAction implements CommandAction {
+public class ContentreplyAction implements CommandAction {
 	
     public String requestPro(HttpServletRequest request,
  
     HttpServletResponse response) throws Throwable {
  
     	Class.forName("com.mysql.jdbc.Driver");
-    	//��ȣ�� �Է¹޾ƿ� ������ ����
-    	int num = Integer.parseInt(request.getParameter("num"));
+    	
     	Connection conn = null;
     	Statement stmt = null;    	
     	ResultSet rs = null;   
-    	
-    	//��ȸ�� ������ ���� ���� ����
-    	int score = 0;
+ 
     	
     	try {
     		//���� Ȯ���� �α��λ��°� �ƴϸ� �α���â ȣ��
@@ -45,7 +42,8 @@ public class ContentAction implements CommandAction {
     			//				"useUnicode=true&characterEncoding = euc-kr";
     		String dbUser = "root";
     		String dbPass = "038062";
-    		String query = "select * from board where num = "+num;
+    		
+    		String query = "select * from reply order by boarddate desc";
     		
     		conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
     		
@@ -53,26 +51,24 @@ public class ContentAction implements CommandAction {
     		rs = stmt.executeQuery(query);    		
     		
     		//��ȸ�� ����Ʈ�� �޾ƿ�
-    		ArrayList<board> articleList = new ArrayList<board>();
+    		ArrayList<reply> Replylist = new ArrayList<reply>();    		
     		
     		while(rs.next()){
-    			board article = new board();
-    			article.setNum(rs.getInt("num"));    			
+    			reply article = new reply();
+    			article.setcount(rs.getInt("count"));
     			article.setSubject(rs.getString("subject"));
+    			article.setTitle(rs.getString("title"));
     			article.setContent(rs.getString("content"));
     			article.setId(rs.getString("id"));
-    			article.setBoarddate(rs.getString("boarddate"));
-    			score = Integer.parseInt(rs.getString("score")) + 1;
-    			article.setScore(String.valueOf(score));
     			article.setEmail(rs.getString("email"));
-    			articleList.add(article);
+    			article.setBoarddate(rs.getString("boarddate"));
+    			
+    			Replylist.add(article);
+    		 
     		}
-    		request.setAttribute("articleList",articleList);
+    		request.setAttribute("Replylist",Replylist);
     		
-    		//��ȸ�� ������Ʈ
-    		String query2 =  "UPDATE board SET score='" + score +    						
-					"' WHERE num=" + num;    		
-    		stmt.executeUpdate(query2); 
+    	
     		
     	} catch(SQLException ex){
     		
@@ -83,7 +79,7 @@ public class ContentAction implements CommandAction {
     		if(conn != null) try{conn.close();} catch(SQLException ex) {}
     	}
  
-        return "content.jsp";
+        return "replylist.jsp";
  
     }
  

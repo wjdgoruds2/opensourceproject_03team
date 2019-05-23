@@ -1,27 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=euc-kr" pageEncoding="euc-kr"%>
-    <script> 
+	<script > 
 
-function writeCheck()
-  {
-   var form = document.writeform;
+	function writeCheck()
+ 	 {
+  	 var form = document.writeform;
    
-  if( !form.subject.value )
-   {
-    alert( "力格阑 利绢林技夸" );
+  	if( !form.subject.value ){
+	alert( "力格阑 利绢林技夸" );
     form.subject.focus();
-    return;
-   }
+    return true;
+   	}
  
-  if( !form.content.value )
-   {
+  	if( !form.content.value ){
     alert( "郴侩阑 利绢林技夸" );
     form.content.focus();
-    return;
-   }  
+    return true;
+  	 }  
  
-  form.submit();
-  }
- </script>
+ 	 form.submit();
+  	}
+	 </script>
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,6 +38,7 @@ function writeCheck()
 			<tr >
 				<th>力格</th>
 				<th style="text-align:left"><input type="text" name="subject"></th>
+				
 			</tr>
 			<tr>
 				<th>累己磊</th>
@@ -47,7 +46,7 @@ function writeCheck()
 			</tr>
 			<tr>
 				<th>email</th>
-				<th style="text-align:left"><input type="email" name="email"></th>
+				<th style="text-align:left">${email}</th>
 			</tr>
 			<tr>	
 				<th>郴侩</th>
@@ -55,7 +54,7 @@ function writeCheck()
 			</tr>	
 			<tr>
 				<th></th>
-				<th style="text-align:right">		
+				<th style="text-align:right">	
 					<input type=submit class="btn btn-success" value="殿废" Onclick="javascript:writeCheck();">
 					<input type=button class="btn btn-secondary" value="秒家" OnClick="window.location='list.do'">
 				</th>

@@ -64,7 +64,7 @@ function writeCheck()
 	<tr>
 		<th></th>
 		<th style="text-align:right">
-			<input type=submit class="btn btn-success" value="등록" Onclick="javascript:writeCheck();">
+			<input type=button class="btn btn-success" value="등록" Onclick="javascript:writeCheck();">
 			<input type=button class="btn btn-secondary" value="취소" OnClick="window.location='login.jsp'">
 		</th>
 	</tr>

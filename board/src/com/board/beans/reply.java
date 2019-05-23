@@ -1,14 +1,16 @@
 package com.board.beans;
 
-public class board {
+public class reply {
 	//번호
-	private int num;
+	private int count;
 	
-	//제목
+	//원글 제목
 	private String subject;
-	
+	//제목
+	private String title;
 	//내용
 	private String content;
+	
 	
 	//아이디
 	private String id;
@@ -19,39 +21,26 @@ public class board {
 	//작성일자
 	private String boarddate;
 	
-	//조회수
-	private String score;
 	
-	//검색옵션
-	public String opt;
+
 	
-	//검색내용
-	public String condition;
-	
-	
-	public String getOpt() {
-		return opt;
+	public int getcount() {
+		return count;
 	}
-	public void setOpt(String opt) {
-		this.opt = opt;
-	}
-	public String getCondition() {
-		return condition;
-	}
-	public void setCondition(String condition) {
-		this.condition = condition;
-	}
-	public int getNum() {
-		return num;
-	}
-	public void setNum(int num) {
-		this.num = num;
+	public void setcount(int count) {
+		this.count = count;
 	}
 	public String getSubject() {
 		return subject;
 	}
 	public void setSubject(String subject) {
 		this.subject = subject;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public String getContent() {
 		return content;
@@ -77,12 +66,5 @@ public class board {
 	public void setBoarddate(String boarddate) {
 		this.boarddate = boarddate;
 	}
-	public String getScore() {
-		return score;
-	}
-	public void setScore(String score) {
-		this.score = score;
-	}
-
 	
 }

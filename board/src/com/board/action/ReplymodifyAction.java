@@ -1,6 +1,3 @@
-/**
- * �Խ��� ���� �����ϴ� Action
- */
 package com.board.action;
  
 import java.sql.Connection;
@@ -14,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.board.controller.CommandAction;
  
-public class ModifyAction implements CommandAction {
+public class ReplymodifyAction implements CommandAction {
  
     public String requestPro(HttpServletRequest request,
  
@@ -35,16 +32,17 @@ public class ModifyAction implements CommandAction {
         		}
     			
     			request.setCharacterEncoding("euc-kr");
-    			String num = request.getParameter("num");    			
-    			String subject = request.getParameter("subject");
+    			String count = request.getParameter("count");    			
+    			String title = request.getParameter("title");
     			String content = request.getParameter("content");
+    			System.out.printf(count);
     			
     			conn = DriverManager.getConnection(url,dbUser,dbPass);    			    			    			
     					
     			stmt = conn.createStatement();
    			    			    		
-    			String sql = "UPDATE board SET subject='" + subject + "' ,content='"+ content +    						
-    						"',boarddate=NOW() WHERE num=" + num;				
+    			String sql = "UPDATE reply SET title='" + title + "' ,content='"+ content +    						
+    						"',boarddate=NOW() WHERE count=" + count;				
     			stmt.executeUpdate(sql);    			
 
     			stmt.close();
@@ -58,7 +56,7 @@ public class ModifyAction implements CommandAction {
 		}
     	
     	
-        return "content.do";
+        return "contentreply.do";
  
     }
  

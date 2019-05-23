@@ -23,6 +23,7 @@ public class LoginAction implements CommandAction{
 		
 		//占쌉력뱄옙占쏙옙 id占쏙옙 pw占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
 		String id = request.getParameter("id");
+		String email = request.getParameter("email");
     	String password = request.getParameter("password");    	
     	    	
     	Class.forName("com.mysql.jdbc.Driver");
@@ -44,7 +45,8 @@ public class LoginAction implements CommandAction{
 			stmt = conn.createStatement();
 		
 			//id占쏙옙 pw占쏙옙 占승댐옙 db 占싯삼옙 占쏙옙占쏙옙 占쏙옙占쏙옙
-			String query = "select * from usr where id = '"+id+"' and password = '"+password+"';";					
+			String query = "select * from usr where id = '"+id+"' and password = '"+password+"';";	
+			
 			//占쏙옙占쏙옙 占쏙옙占쏙옙占싹울옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙			
 			rs = stmt.executeQuery(query);
 			
@@ -54,10 +56,14 @@ public class LoginAction implements CommandAction{
 			//占쏙옙占� 占싯삼옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 true
 			while(rs.next()){
 				isLogin = true;
+				email=rs.getString("email");
+				
 			}			
 			//占쏙옙占쏙옙占� 占싯삼옙占쏙옙 占실몌옙 占쏙옙占실울옙 id 占쌩곤옙
-			if(isLogin){				
+			if(isLogin){	
 				session.setAttribute("id", id);
+				session.setAttribute("email", email);
+				
 			//占쏙옙占� 占싯삼옙占쏙옙 占싫듸옙 占쏙옙 占쏙옙占쏙옙 占싯억옙 호占쏙옙
 			}else if(!isLogin && id != null){
 				return "loginerror2.jsp";
