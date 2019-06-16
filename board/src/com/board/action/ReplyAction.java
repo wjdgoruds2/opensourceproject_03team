@@ -1,5 +1,5 @@
 /**
- * ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ Action
+ * ±ÛÀ» ÀÛ¼º ÇÏ°í µ¥ÀÌÅÍº£ÀÌ½º¿¡ ³Ö´Â Action
  */
 package com.board.action;
  
@@ -25,15 +25,11 @@ public class ReplyAction implements CommandAction {
     HttpServletResponse response) throws Throwable {
     	
     	request.setCharacterEncoding("UTF-8");
-    	//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½Þ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    	//Á¦¸ñ°ú ³»¿ëÀ» ÀÔ·Â ¹Þ¾Æ º¯¼ö¿¡ ÀúÀå
     	String subject = request.getParameter("subject");
     	String title = request.getParameter("title");
     	String content = request.getParameter("content");
-    	String count = request.getParameter("count");
-    	
-    	
-    	
-    	
+
     	String id = null;
     	String email = null;
     	Class.forName("com.mysql.jdbc.Driver");
@@ -43,18 +39,19 @@ public class ReplyAction implements CommandAction {
     
     	try{
     		HttpSession session = request.getSession();
-    		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ Ã¢ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
+    		//¼¼¼ÇÀ» ÀÐ¾î ·Î±×ÀÎ »óÅÂ°¡ ¾Æ´Ï¸é ·Î±×ÀÎ Ã¢À¸·Î ÀÌµ¿
         	id = (String) session.getAttribute("id");
         	email = (String) session.getAttribute("email");
     		if( id == null){
     			return "loginerror.jsp";
     		}
     		
+    		
     		String jdbcDriver = "jdbc:mysql://localhost/jspdb?serverTimezone=UTC";
     		          // +
 						//		"useUnicode=true&characterEncoding = euc-kr";
 			String dbUser = "root";
-			String dbPass = "038062";
+			String dbPass = "0714";
     		
 			conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 			
@@ -65,20 +62,21 @@ public class ReplyAction implements CommandAction {
     				pstmt.setString(3, title);
     				pstmt.setString(4, content);
     				pstmt.setString(5, email);
-    				//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    				//Äõ¸® ½ÇÇà
     				pstmt.executeUpdate();
+    				request.setAttribute("subject",subject);
     		
         			conn.close();
         			
     	} catch(SQLException ex){
 			
 		}finally{
-    		if(pstmt != null) try{pstmt.close();} catch(SQLException ex){}
+    		if(pstmt != null) try{pstmt.close();} catch(SQLException ex){ }
     		if(conn != null) try{conn.close();} catch(SQLException ex){}
     		}
     	
  
-        return "contentreply.do?subject="+subject;
+        return "reply.jsp";
  
     }
  

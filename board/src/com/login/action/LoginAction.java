@@ -38,7 +38,7 @@ public class LoginAction implements CommandAction{
     		         //+
 					 //			"useUnicode=true&characterEncoding = euc-kr";
 			String dbUser = "root";
-			String dbPass = "038062";
+			String dbPass = "0714";
     		
 			//占쏙옙占쏙옙占싶븝옙占싱쏙옙 占쏙옙占쏙옙
 			conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);			

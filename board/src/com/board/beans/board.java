@@ -1,34 +1,34 @@
 package com.board.beans;
 
 public class board {
-	//ë²ˆí˜¸
+	//¹øÈ£
 	private int num;
 	
-	//ì œëª©
+	//Á¦¸ñ
 	private String subject;
 	
-	//ë‚´ìš©
+	//³»¿ë
 	private String content;
 	
-	//ì•„ì´ë””
+	//¾ÆÀÌµğ
 	private String id;
 	
-	//ì´ë©”ì¼
+	//ÀÌ¸ŞÀÏ
 	private String email;
 	
-	//ì‘ì„±ì¼ì
+	//ÀÛ¼ºÀÏÀÚ
 	private String boarddate;
 	
-	//ì¡°íšŒìˆ˜
+	//Á¶È¸¼ö
 	private String score;
 	
-	//ê²€ìƒ‰ì˜µì…˜
+	//°Ë»ö¿É¼Ç
 	public String opt;
 	
-	//imgê²½ë¡œ
+	//img°æ·Î
 	private String imgpath;
 	
-	//ê²€ìƒ‰ë‚´ìš©
+	//°Ë»ö³»¿ë
 	public String condition;
 	private String area;
 	private String performtime;

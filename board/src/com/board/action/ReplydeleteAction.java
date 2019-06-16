@@ -23,7 +23,7 @@ public class ReplydeleteAction implements CommandAction {
     	Class.forName("com.mysql.jdbc.Driver");
     	String url = "jdbc:mysql://localhost/jspdb?serverTimezone=UTC";
     	String dbUser = "root";
-    	String dbPass = "038062";
+    	String dbPass = "0714";
     	int count = Integer.parseInt(request.getParameter("count"));
     	Statement stmt = null;
     	Connection conn = null;

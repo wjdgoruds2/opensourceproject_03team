@@ -1,6 +1,5 @@
 package com.board.action;
  
-import java.net.URLDecoder;
 import java.sql.*;
 import java.util.ArrayList;
  
@@ -42,10 +41,9 @@ public class ContentreplyAction implements CommandAction {
     			//	+
     			//				"useUnicode=true&characterEncoding = euc-kr";
     		String dbUser = "root";
-    		String dbPass = "038062";
-    		String subject = request.getParameter("subject");  
-        	String subjects = URLDecoder.decode(subject,"UTF-8");
-    		String query = "select * from reply where subject ='"+subjects+"' order by boarddate desc";
+    		String dbPass = "0714";
+    		String subject = request.getParameter("subject");
+    		String query = "select * from reply where subject ='"+subject+"' order by boarddate desc";
     		
     		conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
     		

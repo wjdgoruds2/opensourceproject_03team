@@ -1,3 +1,6 @@
+/**
+ * �Խ��� ������ ���� ǥ���ϴ� Action
+ */
 package com.board.action;
  
 import java.sql.Connection;
@@ -21,9 +24,10 @@ public class ModifyformAction implements CommandAction {
     HttpServletResponse response) throws Throwable {
     	request.setCharacterEncoding("UTF-8");
     	Class.forName("com.mysql.jdbc.Driver");
-    	String url = "jdbc:mysql://localhost/jspdb?serverTimezone=UTC";
+    	//String url = "jdbc:mysql://localhost/jspdb?serverTimezone=UTC";
+    	String url = "jdbc:mysql://localhost/jspdb?serverTimezone=UTC&characterEncoding=euckr&useUnicode=true&mysqlEncoding=euckr";
     	String dbUser = "root";
-    	String dbPass = "038062";
+    	String dbPass = "0714";
     	Connection conn = null;
     	Statement stmt = null;    	
     	ResultSet rs = null;

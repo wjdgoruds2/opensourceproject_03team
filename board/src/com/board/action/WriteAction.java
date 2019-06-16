@@ -28,7 +28,7 @@ public class WriteAction implements CommandAction {
 		MultipartRequest multi = null;	
 
 		int sizeLimit = 10 * 1024 * 1024 ; // 10메가입니다.
-		String imgpath = request.getRealPath("/img");    // 파일이 업로드될 실제 tomcat 폴더의 WebContent 기준
+		String imgpath = request.getRealPath("/image");    // 파일이 업로드될 실제 tomcat 폴더의 WebContent 기준
 		String subject="NONE";
     	String content="NONE";
     	String area="NONE";
@@ -36,18 +36,18 @@ public class WriteAction implements CommandAction {
     	String performdate ="NONE";
     	String performlocation ="NONE";
     	String type="NONE";
-
+    	String filename1=null;
 		
 		
 		try{
 			System.out.print(imgpath+"\n");
-			multi=new MultipartRequest(request, imgpath, sizeLimit, "UTF-8", new DefaultFileRenamePolicy()); 
+			multi=new MultipartRequest(request, imgpath, sizeLimit, "euc-kr", new DefaultFileRenamePolicy()); 
 			Enumeration<?> files = multi.getFileNames(); 
 			String file1 = (String)files.nextElement(); 
-			String filename1 = multi.getFilesystemName(file1); 
+			filename1 = multi.getFilesystemName(file1); 
 			
 			if(filename1==null) {
-    			imgpath=null;
+    			imgpath="noimage.png";
     			
     		}
     		else {
@@ -59,7 +59,6 @@ public class WriteAction implements CommandAction {
     	//제목과 내용을 입력 받아 변수에 저장
     	subject = multi.getParameter("subject");
     	content = multi.getParameter("content");
-    	content = content.replace("\r\n","<br>");
     	area = multi.getParameter("area");
     	performtime = multi.getParameter("performtime");
     	performdate = multi.getParameter("performdate");
@@ -86,11 +85,11 @@ public class WriteAction implements CommandAction {
     		}
     		
     		String jdbcDriver = "jdbc:mysql://localhost/jspdb?serverTimezone=UTC";
-	           // +
-				//		"useUnicode=true&characterEncoding = euc-kr";
-    		String dbUser = "root";
-    		String dbPass = "038062";
-	
+    		          // +
+						//		"useUnicode=true&characterEncoding = euc-kr";
+			String dbUser = "root";
+			String dbPass = "0714";
+    		
 			conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 			
       		pstmt = conn.prepareStatement(      				
@@ -104,7 +103,7 @@ public class WriteAction implements CommandAction {
     				pstmt.setString(7, performlocation);
     				pstmt.setString(8, type);
     				pstmt.setString(9, email);
-    				pstmt.setString(10, imgpath);
+    				pstmt.setString(10,filename1);
     				
     				
     				//쿼리 실행

@@ -28,6 +28,11 @@ public class ContentTypeAction implements CommandAction {
     	Statement stmt = null;    	
     	ResultSet rs = null;   
     	
+    	int number = 1;
+    	if(request.getParameter("number")!=null) {
+    		number=  Integer.parseInt(request.getParameter("number"));
+    	}
+    	
     	//��ȸ�� ������ ���� ���� ����
     	int score = 0;
     	
@@ -44,12 +49,12 @@ public class ContentTypeAction implements CommandAction {
     			//	+
     			//				"useUnicode=true&characterEncoding = euc-kr";
     		String dbUser = "root";
-    		String dbPass = "038062";
+    		String dbPass = "0714";
     		String type = request.getParameter("type");  
         	String types = URLDecoder.decode(type,"UTF-8");
     		String query = "select * from board where type ='"+types+"' order by boarddate desc";
     		
-    		request.setAttribute("types", types);
+    		request.setAttribute("types",types);
     		
     		conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
     		
@@ -74,10 +79,15 @@ public class ContentTypeAction implements CommandAction {
     			article.setPerformlocation(rs.getString("performlocation"));
     			article.setPerformtime(rs.getString("performtime"));
     			article.setType(rs.getString("type"));
-    			article.setimgpath(rs.getString("imgpath"));
     			articleList.add(article);
     		}
-    		
+
+    		request.setAttribute("number",number );
+    		request.setAttribute("number_",number+1 );
+    		request.setAttribute("startnumber", (number-1)*4);
+    		request.setAttribute("endnumber", (number-1)*4+3);
+    		request.setAttribute("_number",number-1 );
+    		request.setAttribute("_size",(articleList.size()/4)+1 );
     		request.setAttribute("articleList",articleList);
     	
     		

@@ -193,7 +193,7 @@ $('#carouselExample').on('slide.bs.carousel', function (e) {
                           <c:forEach items="${articleList}" var="article" begin="0" end="3" > 
                                 <div class="col-md-3">
                                 <div class="box19">
-                       			<img src="./img/${article.imgpath}" style="height: 80%; width: 100%;" >
+                       			<img src="./image/${article.imgpath}" style="height: 80%; width: 100%;" >
                         		<div class="box-content">
                         		<h3 class="title">${article.subject}</h3>
                         		<br/><br/>
@@ -229,7 +229,8 @@ $('#carouselExample').on('slide.bs.carousel', function (e) {
                                     <c:forEach items="${articleList}" var="article" begin="4" end="7" > 
                                 <div class="col-md-3">
                                 <div class="box19">
-                       			<img src="./img/${article.imgpath}" style="height: 80%; width: 100%;" >
+                       			<img src="./image/${article.imgpath}" style="height: 80%; width: 100%;" >
+                       			
                         		<div class="box-content">
                         		<h3 class="title">${article.subject}</h3>
                         		<br/><br/>

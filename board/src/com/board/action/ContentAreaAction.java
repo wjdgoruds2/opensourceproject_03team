@@ -26,7 +26,18 @@ public class ContentAreaAction implements CommandAction {
     	//��ȣ�� �Է¹޾ƿ� ������ ����
     	Connection conn = null;
     	Statement stmt = null;    	
-    	ResultSet rs = null;   
+    	ResultSet rs = null;  
+    	
+    	int number = 1;
+    	if(request.getParameter("number")!=null) {
+    		number=  Integer.parseInt(request.getParameter("number"));
+    	}
+    	
+		request.setAttribute("number",number );
+		request.setAttribute("number_",number+1 );
+		request.setAttribute("startnumber", (number-1)*4);
+		request.setAttribute("endnumber", (number-1)*4+3);
+		request.setAttribute("_number",number-1 );
     	
     	//��ȸ�� ������ ���� ���� ����
     	int score = 0;
@@ -38,25 +49,24 @@ public class ContentAreaAction implements CommandAction {
     		if(id == null){    			
     			return "loginerror.jsp";
     		}
-    		
-    		String jdbcDriver = "jdbc:mysql://localhost/jspdb?serverTimezone=UTC";
-    		
+
+    		//String jdbcDriver = "jdbc:mysql://localhost/jspdb?serverTimezone=UTC";
+    		String jdbcDriver = "jdbc:mysql://localhost/jspdb?serverTimezone=UTC&characterEncoding=euckr&useUnicode=true&mysqlEncoding=euckr";
+        	
     			//	+
     			//				"useUnicode=true&characterEncoding = euc-kr";
     		String dbUser = "root";
-    		String dbPass = "038062";
+    		String dbPass = "0714";
     		String area = request.getParameter("area");  
         	String areas = URLDecoder.decode(area,"UTF-8");
     		String query = "select * from board where area ='"+areas+"' order by boarddate desc";
-    		request.setAttribute("areas",areas);
+    		request.setAttribute("areas", areas);
     		conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
-    		
-    		stmt = conn.createStatement();    		
-    		rs = stmt.executeQuery(query);    		
-    		
+    		stmt = conn.createStatement();    
+    		rs = stmt.executeQuery(query);  
+
     		//��ȸ�� ����Ʈ�� �޾ƿ�
     		ArrayList<board> articleList = new ArrayList<board>();
-    		
     		while(rs.next()){
     			board article = new board();
     			article.setNum(rs.getInt("num"));    			
@@ -75,16 +85,19 @@ public class ContentAreaAction implements CommandAction {
     			article.setimgpath(rs.getString("imgpath"));
     			articleList.add(article);
     		}
+    		
+    		request.setAttribute("_size",(articleList.size()/4)+1 );
+    		
     		request.setAttribute("articleList",articleList);
-    	
+
     		
     	} catch(SQLException ex){
     		
     	} finally{
-    		if(rs != null) try{rs.close();} catch(SQLException ex){}
-    		if(stmt != null) try{stmt.close();} catch(SQLException ex) {}
+    		if(rs != null) try{rs.close();} catch(SQLException ex){ }
+    		if(stmt != null) try{stmt.close();} catch(SQLException ex) { }
     		
-    		if(conn != null) try{conn.close();} catch(SQLException ex) {}
+    		if(conn != null) try{conn.close();} catch(SQLException ex) { }
     	}
  
         return "arealist.jsp";

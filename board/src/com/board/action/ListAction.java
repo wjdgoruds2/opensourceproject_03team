@@ -1,8 +1,8 @@
 /**
- * ??????? ??????? ???? Action
+ * ����Ʈ�� �����ֱ� ���� Action
  */
 package com.board.action;
-
+ 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -28,11 +28,9 @@ public class ListAction implements CommandAction {
     	Statement stmt = null;
     	ResultSet rs = null;    	
     	
-    	//??????? ??????? ??? ?????? ????
+    	//�˻��ɼǰ� �˻����� �޾� ������ ����
     	String opt = request.getParameter("opt");
     	String condition = request.getParameter("condition");
-    	
-    	
     	int number = 1;
     	if(request.getParameter("number")!=null) {
     		number=  Integer.parseInt(request.getParameter("number"));
@@ -41,7 +39,7 @@ public class ListAction implements CommandAction {
     	
     	try {
     		HttpSession session = request.getSession();
-    		//?��????? ??????? ?????? ????????? ?��?????????? ???    		    		
+    		//�α����� �Ǿ����� ������ �����˾��� �α���ȭ������ �̵�    		    		
     		String id = (String) session.getAttribute("id");    		
     		if(id == null){    			
     			return "loginerror.jsp";
@@ -51,7 +49,7 @@ public class ListAction implements CommandAction {
     		           // +
     					//		"useUnicode=true&characterEncoding = euc-kr";
     		String dbUser = "root";
-    		String dbPass = "038062";
+    		String dbPass = "0714";
     		String query = null; 
     		
     		if(opt == null){    			

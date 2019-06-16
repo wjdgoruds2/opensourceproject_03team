@@ -25,7 +25,7 @@ public class ContentAction implements CommandAction {
     	//��ȣ�� �Է¹޾ƿ� ������ ����
 
     int num = Integer.parseInt(request.getParameter("num"));
-    String subject = request.getParameter("subject");
+
     	
     	Connection conn = null;
     	Statement stmt = null;    	
@@ -42,12 +42,13 @@ public class ContentAction implements CommandAction {
     			return "loginerror.jsp";
     		}
     		
-    		String jdbcDriver = "jdbc:mysql://localhost/jspdb?serverTimezone=UTC";
-    		
+    		//String jdbcDriver = "jdbc:mysql://localhost/jspdb?serverTimezone=UTC";
+    		String jdbcDriver = "jdbc:mysql://localhost/jspdb?serverTimezone=UTC&characterEncoding=euckr&useUnicode=true&mysqlEncoding=euckr";
+        	
     			//	+
     			//				"useUnicode=true&characterEncoding = euc-kr";
     		String dbUser = "root";
-    		String dbPass = "038062";
+    		String dbPass = "0714";
     		String query = "select * from board where num = "+num;
     		
     		conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
