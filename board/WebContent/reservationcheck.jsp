@@ -7,7 +7,7 @@
 				
 				  <script language=javascript>
 				  	self.window.alert("예약이 완료되었습니다.");
-				  	location.href="list.do";
+				  	location.href="mainlist.do";
 				  </script>
 </body>
 </html>

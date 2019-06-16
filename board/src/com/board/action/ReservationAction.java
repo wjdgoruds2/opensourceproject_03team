@@ -60,7 +60,7 @@ public class ReservationAction implements CommandAction {
     		          // +
 						//		"useUnicode=true&characterEncoding = euc-kr";
 			String dbUser = "root";
-			String dbPass = "0714";
+			String dbPass = "038062";
     		
 			conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 			

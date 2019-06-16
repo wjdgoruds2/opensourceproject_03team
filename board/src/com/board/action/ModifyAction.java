@@ -1,6 +1,3 @@
-/**
- * �Խ��� ���� �����ϴ� Action
- */
 package com.board.action;
  
 import java.sql.Connection;
@@ -14,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.board.controller.CommandAction;
-import com.mysql.jdbc.PreparedStatement;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
  
@@ -27,7 +23,7 @@ public class ModifyAction implements CommandAction {
     	Class.forName("com.mysql.jdbc.Driver");
     	String url = "jdbc:mysql://localhost/jspdb?serverTimezone=UTC";
     	String dbUser = "root";
-    	String dbPass = "0714";
+    	String dbPass = "038062";
     	Connection conn = null;
     	Statement stmt = null;   
     	
@@ -56,7 +52,7 @@ public class ModifyAction implements CommandAction {
         	        		
         		try{
         		
-        		multi=new MultipartRequest(request, imgpath, sizeLimit, "euc-kr", new DefaultFileRenamePolicy()); 
+        		multi=new MultipartRequest(request, imgpath, sizeLimit, "UTF-8", new DefaultFileRenamePolicy()); 
         		Enumeration<?> files = multi.getFileNames(); 
         		String file1 = (String)files.nextElement(); 
         		String filename1 = multi.getFilesystemName(file1); 
@@ -77,6 +73,7 @@ public class ModifyAction implements CommandAction {
             	
             	subject = multi.getParameter("subject");
             	content = multi.getParameter("content");
+            	content = content.replace("\r\n","<br>");
             	area = multi.getParameter("area");
             	performtime = multi.getParameter("performtime");
             	performdate = multi.getParameter("performdate");
@@ -114,7 +111,7 @@ public class ModifyAction implements CommandAction {
 		if(conn != null) try{conn.close();} catch(SQLException ex){}
 		}
     		
-        return "modify.jsp";
+        return "content.do?num="+num;
  
     }
  

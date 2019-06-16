@@ -25,7 +25,7 @@ public class ContentAction implements CommandAction {
     	//��ȣ�� �Է¹޾ƿ� ������ ����
 
     int num = Integer.parseInt(request.getParameter("num"));
-
+    String subject = request.getParameter("subject");
     	
     	Connection conn = null;
     	Statement stmt = null;    	
@@ -47,7 +47,7 @@ public class ContentAction implements CommandAction {
     			//	+
     			//				"useUnicode=true&characterEncoding = euc-kr";
     		String dbUser = "root";
-    		String dbPass = "0714";
+    		String dbPass = "038062";
     		String query = "select * from board where num = "+num;
     		
     		conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);

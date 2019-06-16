@@ -20,7 +20,7 @@ public class ReplymodifyAction implements CommandAction {
     	Class.forName("com.mysql.jdbc.Driver");
     	String url = "jdbc:mysql://localhost/jspdb?serverTimezone=UTC";
     	String dbUser = "root";
-    	String dbPass = "0714";
+    	String dbPass = "038062";
     	Connection conn = null;
     	Statement stmt = null;    	    	
     		try{

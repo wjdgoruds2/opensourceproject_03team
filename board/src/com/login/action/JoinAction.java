@@ -42,7 +42,7 @@ public class JoinAction implements CommandAction {
     		       //+
 					//			"useUnicode=true&characterEncoding = euc-kr";
 			String dbUser = "root";
-			String dbPass = "0714";
+			String dbPass = "038062";
     		
 			//데이터베이스에 연결
 			conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);

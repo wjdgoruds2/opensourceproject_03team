@@ -41,7 +41,7 @@ public class WriteAction implements CommandAction {
 		
 		try{
 			System.out.print(imgpath+"\n");
-			multi=new MultipartRequest(request, imgpath, sizeLimit, "euc-kr", new DefaultFileRenamePolicy()); 
+			multi=new MultipartRequest(request, imgpath, sizeLimit, "UTF-8", new DefaultFileRenamePolicy()); 
 			Enumeration<?> files = multi.getFileNames(); 
 			String file1 = (String)files.nextElement(); 
 			String filename1 = multi.getFilesystemName(file1); 
@@ -59,6 +59,7 @@ public class WriteAction implements CommandAction {
     	//제목과 내용을 입력 받아 변수에 저장
     	subject = multi.getParameter("subject");
     	content = multi.getParameter("content");
+    	content = content.replace("\r\n","<br>");
     	area = multi.getParameter("area");
     	performtime = multi.getParameter("performtime");
     	performdate = multi.getParameter("performdate");
@@ -85,11 +86,11 @@ public class WriteAction implements CommandAction {
     		}
     		
     		String jdbcDriver = "jdbc:mysql://localhost/jspdb?serverTimezone=UTC";
-    		          // +
-						//		"useUnicode=true&characterEncoding = euc-kr";
-			String dbUser = "root";
-			String dbPass = "0714";
-    		
+	           // +
+				//		"useUnicode=true&characterEncoding = euc-kr";
+    		String dbUser = "root";
+    		String dbPass = "038062";
+	
 			conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 			
       		pstmt = conn.prepareStatement(      				

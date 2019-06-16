@@ -44,11 +44,11 @@ public class ContentAreaAction implements CommandAction {
     			//	+
     			//				"useUnicode=true&characterEncoding = euc-kr";
     		String dbUser = "root";
-    		String dbPass = "0714";
+    		String dbPass = "038062";
     		String area = request.getParameter("area");  
         	String areas = URLDecoder.decode(area,"UTF-8");
     		String query = "select * from board where area ='"+areas+"' order by boarddate desc";
-    		
+    		request.setAttribute("areas",areas);
     		conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
     		
     		stmt = conn.createStatement();    		

@@ -6,7 +6,7 @@
 	<body>
   			<script>
    				self.window.alert("해당 댓글을 삭제하였습니다.");
-   				location.href="list.do";
+   				location.href="mainlist.do";
   			</script>
 </body>
 </html>

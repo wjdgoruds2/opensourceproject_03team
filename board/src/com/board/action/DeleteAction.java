@@ -24,7 +24,7 @@ public class DeleteAction implements CommandAction {
     	Class.forName("com.mysql.jdbc.Driver");
     	String url = "jdbc:mysql://localhost/jspdb?serverTimezone=UTC";
     	String dbUser = "root";
-    	String dbPass = "0714";
+    	String dbPass = "038062";
     	int num = Integer.parseInt(request.getParameter("num"));
     	Statement stmt = null;
     	Connection conn = null;

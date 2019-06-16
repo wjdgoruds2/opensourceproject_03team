@@ -18,7 +18,6 @@
 		    form.content.focus();
 		    return;
 		   }  
-
 		 
 		  form.submit();
 		  }
@@ -29,17 +28,177 @@
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<title>BOARD 테이블 레코드 수정</title>
+  	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR|Playfair+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap" rel="stylesheet">
+	<title>댓글 수정</title>
+	
+	<style>
+	
+	body{
+font-family: 'Noto Sans KR', sans-serif;
+}
+.bg-1{
+	background-color: gray;
+	color: #FFFFFF;
+	text-align: right;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+.basicBox {
+  width: 130px;
+  height: 40px;
+  margin: 15px auto;
+  color: #908383;
+  font-size: 1.25rem;
+  line-height: 40px;
+  text-transform: uppercase;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+svg rect {
+  fill: none;
+  stroke: #908383;
+  stroke-width: 1;
+}
+.basicBox:hover svg rect {
+  stroke: #908383;
+}
+
+/* Basic Box */
+svg rect {
+  stroke-dasharray: 400, 0;
+  -webkit-transition: all 0.8s ease-in-out;
+  -moz-transition: all 0.8s ease-in-out;
+  -ms-transition: all 0.8s ease-in-out;
+  -o-transition: all 0.8s ease-in-out;
+}
+.basicBox:hover svg rect {
+  stroke-width: 3;
+  stroke-dasharray: 35, 220;
+  stroke-dashoffset: 38;
+  -webkit-transition: all 0.8s ease-in-out;
+  -moz-transition: all 0.8s ease-in-out;
+  -ms-transition: all 0.8s ease-in-out;
+  -o-transition: all 0.8s ease-in-out;
+}
+
+.btn-three {
+	color: #FFF;
+	transition: all 0.5s;
+	position: relative;
+}
+.btn-three::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	background-color: rgba(255,255,255,0.1);
+	transition: all 0.3s;
+}
+.btn-three:hover::before {
+	opacity: 0 ;
+	-webkit-transform: scale(0.5,0.5);
+	        transform: scale(0.5,0.5);
+}
+.btn-three::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	opacity: 0;
+	transition: all 0.3s;
+	border: 1px solid rgba(255,255,255,0.5);
+	-webkit-transform: scale(1.2,1.2);
+	        transform: scale(1.2,1.2);
+}
+.btn-three:hover::after {
+	opacity: 1;
+	-webkit-transform: scale(1,1);
+	        transform: scale(1,1);
+}
+
+.btn-two {
+	color: #908383;
+	transition: all 0.5s;
+	position: relative;
+}
+.btn-two::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	background-color: rgba(144, 131, 131,0.1);
+	transition: all 0.3s;
+}
+.btn-two:hover::before {
+	opacity: 0 ;
+	-webkit-transform: scale(0.5,0.5);
+	        transform: scale(0.5,0.5);
+}
+.btn-two::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	opacity: 0;
+	transition: all 0.3s;
+	border: 1px solid rgba(144, 131, 131,0.5);
+	-webkit-transform: scale(1.2,1.2);
+	        transform: scale(1.2,1.2);
+}
+.btn-two:hover::after {
+	opacity: 1;
+	-webkit-transform: scale(1,1);
+	        transform: scale(1,1);
+}
+
+footer{
+	padding: 40px;
+	height: 100px;
+	background-color: gray;
+	color: white;
+	text-align: center;
+}
+</style>
+	
 </head>
 <body>
-	<div style="text-align:right">
-		사용자ID : ${id} <input type=button class="btn btn-info" value="로그아웃" OnClick="window.location='logout.do'">
-	</div>
-	<form action ="/board/modify.do" enctype="multipart/form-data" method="post" name="writeform">
+<div class="container-fluid bg-1">
+	<br/><b><i>${id} </i></b>님, 안녕하세요!　
+
+  <div class="btn btn-three" style="margin-right: 10px;" OnClick="window.location='logout.do'">
+<span>로그아웃</span>
+  </div>
+<h1 style="letter-spacing: -1px; font-family: 'Noto Serif KR', serif; text-align: center; margin-top: 100px; margin-bottom: 20px;"><b>게시판 수정</b></h1>
+</div>
+
+
+<div class="container bg-2 text-center" style="margin-top: 30px;">
+		<form action ="/board/modify.do" enctype="multipart/form-data" method="post" name="writeform">
 		<c:forEach items="${articleList}" var="article">
 				<input type="hidden" name="num" value="${article.num}">
-			<table class="table table-striped table-bordered table-hover" style="text-align:center">
-				<caption style="text-align:center">게시판 수정</caption>		
+			<table class="table table-striped table-bordered table-hover" style="text-align:center">		
 				<tr>
 					<td>제목</td>
 					<td style="text-align:left"><input type="text" name="subject" value="${article.subject}"></td>
@@ -58,7 +217,7 @@
 				</tr>
 				<tr>	
 					<td>내용</td>
-					<td style="text-align:left"><textarea name="content" rows="10" placeholder="내용을 입력하세요" >${article.content}</textarea></td>
+					<td style="text-align:left"><textarea name="content"  cols="90" rows="5" placeholder="내용을 입력하세요" >${article.content}</textarea></td>
 				</tr>
 				<tr>
 				<th>공연지역</th>
@@ -133,5 +292,12 @@
 		
 		</c:forEach>
 	</form>
+	</div>
+<footer>
+    <div class="container">
+      <p class="m-0 text-center text-white">오픈소스 전문 프로젝트 &copy; 3조</p>
+    </div>
+    <!-- /.container -->
+  </footer>
 </body>
 </html>

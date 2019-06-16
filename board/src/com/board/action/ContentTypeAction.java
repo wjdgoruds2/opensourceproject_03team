@@ -44,10 +44,12 @@ public class ContentTypeAction implements CommandAction {
     			//	+
     			//				"useUnicode=true&characterEncoding = euc-kr";
     		String dbUser = "root";
-    		String dbPass = "0714";
+    		String dbPass = "038062";
     		String type = request.getParameter("type");  
         	String types = URLDecoder.decode(type,"UTF-8");
     		String query = "select * from board where type ='"+types+"' order by boarddate desc";
+    		
+    		request.setAttribute("types", types);
     		
     		conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
     		
@@ -72,8 +74,10 @@ public class ContentTypeAction implements CommandAction {
     			article.setPerformlocation(rs.getString("performlocation"));
     			article.setPerformtime(rs.getString("performtime"));
     			article.setType(rs.getString("type"));
+    			article.setimgpath(rs.getString("imgpath"));
     			articleList.add(article);
     		}
+    		
     		request.setAttribute("articleList",articleList);
     	
     		

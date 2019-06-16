@@ -1,8 +1,8 @@
 /**
- * ����Ʈ�� �����ֱ� ���� Action
+ * ??????? ??????? ???? Action
  */
 package com.board.action;
- 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -28,13 +28,20 @@ public class ListAction implements CommandAction {
     	Statement stmt = null;
     	ResultSet rs = null;    	
     	
-    	//�˻��ɼǰ� �˻����� �޾� ������ ����
+    	//??????? ??????? ??? ?????? ????
     	String opt = request.getParameter("opt");
     	String condition = request.getParameter("condition");
     	
+    	
+    	int number = 1;
+    	if(request.getParameter("number")!=null) {
+    		number=  Integer.parseInt(request.getParameter("number"));
+    	}
+    	
+    	
     	try {
     		HttpSession session = request.getSession();
-    		//�α����� �Ǿ����� ������ �����˾��� �α���ȭ������ �̵�    		    		
+    		//?��????? ??????? ?????? ????????? ?��?????????? ???    		    		
     		String id = (String) session.getAttribute("id");    		
     		if(id == null){    			
     			return "loginerror.jsp";
@@ -44,7 +51,7 @@ public class ListAction implements CommandAction {
     		           // +
     					//		"useUnicode=true&characterEncoding = euc-kr";
     		String dbUser = "root";
-    		String dbPass = "0714";
+    		String dbPass = "038062";
     		String query = null; 
     		
     		if(opt == null){    			
@@ -76,12 +83,22 @@ public class ListAction implements CommandAction {
     			article.setPerformlocation(rs.getString("performlocation"));
     			article.setPerformtime(rs.getString("performtime"));
     			article.setType(rs.getString("type"));
+    			article.setimgpath(rs.getString("imgpath"));
     			articleList.add(article);
     		}
+    		
+    		request.setAttribute("number",number );
+    		request.setAttribute("number_",number+1 );
+    		request.setAttribute("startnumber", (number-1)*4);
+    		request.setAttribute("endnumber", (number-1)*4+3);
+    		request.setAttribute("_number",number-1 );
+    		request.setAttribute("_size",(articleList.size()/4)+1 );
+    		
     		request.setAttribute("articleList",articleList);
     		
-    	} catch(SQLException ex){
     		
+    	} catch(SQLException ex){
+    		ex.printStackTrace();
     	} finally{
     		if(rs != null) try{rs.close();} catch(SQLException ex){}
     		if(stmt != null) try{stmt.close();} catch(SQLException ex) {}

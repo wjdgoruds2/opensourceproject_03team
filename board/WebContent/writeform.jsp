@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.oreilly.servlet.MultipartRequest,com.oreilly.servlet.multipart.DefaultFileRenamePolicy,java.util.*,java.io.*" %> 
-<%@ page import="java.sql.*" %> 		
+<%@ page import="java.sql.*" %> 
+		
 	<script > 
 	
 	function writeCheck()
@@ -26,17 +27,118 @@
 	 </script>
 <html>
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<title>BOARD 테이블 레코드 삽입</title>
+	 <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  
+
+	<!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/modern-business.css" rel="stylesheet">
+  <link href="css/list.css" rel="stylesheet">
+  
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	
+	<script>	
+	$(function () {
+	    $('.navbar-toggle').click(function () {
+	        $('.navbar-nav').toggleClass('slide-in');
+	        $('.side-body').toggleClass('body-slide-in');
+	        $('#search').removeClass('in').addClass('collapse').slideUp(200);
+
+	        /// uncomment code for absolute positioning tweek see top comment in css
+	        //$('.absolute-wrapper').toggleClass('slide-in');
+	        
+	    });
+	   
+	   // Remove menu for searching
+	   $('#search-trigger').click(function () {
+	        $('.navbar-nav').removeClass('slide-in');
+	        $('.side-body').removeClass('body-slide-in');
+
+	        /// uncomment code for absolute positioning tweek see top comment in css
+	        //$('.absolute-wrapper').removeClass('slide-in');
+
+	    });
+	});
+	</script>
 </head>
 <body>
-	<div style="text-align:right">
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="mainlist.do">문화/정보 사이트</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              MY INFO
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+              <a class="dropdown-item" href="myreservation.do"> 나의 예약 정보</a>
+              <a class="dropdown-item" href="mycontent.do">나의 게시물</a>
+              <a class="dropdown-item" href="myreply.do">나의 댓글</a>
+            </div>
+          </li>
+        </ul>
+        <div style="position: absolute; right:0; color:white;"">
 		사용자ID : ${id} <input type=button class="btn btn-info" value="로그아웃" OnClick="window.location='logout.do'">
 	</div>
-
+      </div>
+    </div>
+  </nav>
+  
+  <header>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <!-- Slide One - Set the background image for this slide in the line below -->
+        <div class="carousel-item active" style="background-image: url('./image/main1_.jpg')">
+          <div class="carousel-caption d-none d-md-block">
+            <p><i><b>모든 공연/전시 예매는 여기서!</b></i></p>
+          </div>
+        </div>
+        <!-- Slide Two - Set the background image for this slide in the line below -->
+        <div class="carousel-item" style="background-image: url('./image/main2_.jpg')">
+          <div class="carousel-caption d-none d-md-block">
+            <p><i><b>지역별,분야별 공연/전시 정보를 한눈에!</b></i></p>
+          </div>
+        </div>
+        <!-- Slide Three - Set the background image for this slide in the line below -->
+        <div class="carousel-item" style="background-image:url('./image/main3_.jpg')">
+          <div class="carousel-caption d-none d-md-block">
+           <p><i><b>나의 정보 관리도 손쉽게!</b></i></p>
+          </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </header>
+<div class="card">
+ <div class="card-body p-4">
+ 
 	<form id="inform" enctype="multipart/form-data"  action ="/board/write.do" method="post" name="writeform" >
 		<table style="text-align:center" class="table table-striped table-bordered table-hover">
 			<caption style="text-align:center">게시판 작성</caption>
@@ -55,7 +157,7 @@
 			</tr>
 			<tr>	
 				<th>공연내용</th>
-				<th style="text-align:left"><textarea name="content" rows="10" placeholder="내용을 입력하세요" form="inform"></textarea></th>
+				<th style="text-align:left"><textarea name="content"  cols="90" rows="5" placeholder="내용을 입력하세요" form="inform"></textarea></th>
 			</tr>
 			<tr >
 				<th>공연지역</th>
@@ -120,10 +222,28 @@
 				<th></th>
 				<th style="text-align:right">	
 					<input type=button class="btn btn-success" value="등록" Onclick="javascript:writeCheck();">
-					<input type=button class="btn btn-secondary" value="취소" OnClick="window.location='list.do'">
+					<input type=button class="btn btn-secondary" value="취소" OnClick="window.location='mainlist.do'">
 				</th>
 			</tr>
 		</table>
-	</form>
+	</form></div></div>
+	<footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">오픈소스 전문 프로젝트 &copy; 3조</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+  	
+  	
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/b4aae4cb0e.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/leafo/sticky-kit/v1.1.2/jquery.sticky-kit.min.js"></script>
+    <script type="text/javascript">
+    	$(".sidebar").stick_in_parent();
+    </script>
 </body>
 </html>
